@@ -1,0 +1,5 @@
+{
+  "name": "FitFriends Tracker",
+  "description": "A minimalist, mobile-first workout tracking app for small groups of friends to stay motivated and synchronized.",
+  "requestFramePermissions": []
+}
