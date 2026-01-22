@@ -20,6 +20,11 @@ const Calendar: React.FC<CalendarProps> = ({ currentUser, workoutData, filter, o
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
+  // Monday as start of week
+  const firstDayOfMonthRaw = new Date(year, month, 1).getDay();
+  const firstDayOfMonth = firstDayOfMonthRaw === 0 ? 6 : firstDayOfMonthRaw - 1;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
   // Navigation constraints for 2026
   const canPrev = month > 0;
   const canNext = month < 11;
