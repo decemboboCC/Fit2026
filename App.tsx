@@ -13,22 +13,27 @@ const App: React.FC = () => {
 
   // Load initial data
   useEffect(() => {
-    const savedData = storageService.loadData();
-    setWorkoutData(savedData);
+    const fetchData = async () => {
+      const savedData = await storageService.loadAllData();
+      setWorkoutData(savedData);
+    };
+    fetchData();
   }, []);
 
-  const handleToggleWorkout = (date: string) => {
+  const handleToggleWorkout = async (date: string) => {
     if (!currentUser) return;
 
+    const currentUsers = workoutData[date] || [];
+    const isAlreadyLogged = currentUsers.includes(currentUser);
+    
+    // Optimistic UI update
     setWorkoutData(prev => {
-      const currentUsers = prev[date] || [];
-      const isAlreadyLogged = currentUsers.includes(currentUser);
-      
+      const users = prev[date] || [];
       let newUsers;
       if (isAlreadyLogged) {
-        newUsers = currentUsers.filter(u => u !== currentUser);
+        newUsers = users.filter(u => u !== currentUser);
       } else {
-        newUsers = [...currentUsers, currentUser];
+        newUsers = [...users, currentUser];
       }
 
       const newData = { ...prev };
@@ -37,10 +42,11 @@ const App: React.FC = () => {
       } else {
         newData[date] = newUsers;
       }
-
-      storageService.saveData(newData);
       return newData;
     });
+
+    // Sync with Supabase
+    await storageService.toggleWorkout(date, currentUser, !isAlreadyLogged);
   };
 
   if (!currentUser) {
