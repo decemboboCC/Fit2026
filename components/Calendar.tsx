@@ -102,8 +102,9 @@ const Calendar: React.FC<CalendarProps> = ({ currentUser, workoutData, filter, o
         <span className={`
           relative z-10 font-extrabold text-[15px] transition-colors duration-300
           ${visibleUsers.length > 0 ? 'text-white' : 
-            (isHoliday || isWeekend) ? 'text-red-500' : 
-            isPastOrToday ? 'text-black' : 'text-slate-200'}
+            (isHoliday || isWeekend) 
+              ? (isPastOrToday ? 'text-red-500' : 'text-red-200') 
+              : (isPastOrToday ? 'text-black' : 'text-slate-200')}
         `}>
           {d}
         </span>
