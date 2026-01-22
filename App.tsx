@@ -56,7 +56,7 @@ const App: React.FC = () => {
           onClick={() => setCurrentUser(null)}
           className={`w-12 h-12 rounded-full ${USERS[currentUser].bgColor} flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-white/5 active:scale-95 transition-all`}
         >
-          {currentUser}
+          {USERS[currentUser].name.charAt(0)}
         </button>
         
         {/* Filter Pill */}
@@ -73,7 +73,7 @@ const App: React.FC = () => {
               onClick={() => setFilter(key)}
               className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-all ${filter === key ? `${USERS[key].bgColor} text-white` : 'bg-transparent text-white/20 hover:text-white/40'}`}
             >
-              {key}
+              {USERS[key].name.charAt(0)}
             </button>
           ))}
         </div>

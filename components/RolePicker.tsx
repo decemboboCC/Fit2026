@@ -26,7 +26,7 @@ const RolePicker: React.FC<RolePickerProps> = ({ onSelect }) => {
             >
               <div className="flex items-center space-x-4">
                 <div className={`w-12 h-12 rounded-full ${user.bgColor} flex items-center justify-center text-white font-bold text-xl shadow-lg`}>
-                  {key}
+                  {user.name.charAt(0)}
                 </div>
                 <span className="font-semibold text-lg text-slate-700">{user.name}</span>
               </div>
