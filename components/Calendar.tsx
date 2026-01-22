@@ -11,13 +11,8 @@ interface CalendarProps {
 }
 
 const Calendar: React.FC<CalendarProps> = ({ currentUser, workoutData, filter, onToggleWorkout }) => {
-  // Initialize to current date, or Jan 2026 if user specifically wants 2026 context
-  const [currentDate, setCurrentDate] = useState(() => {
-    const d = new Date();
-    // If we're not in 2026, default to Jan 2026 for better visibility of the requested features
-    if (d.getFullYear() !== 2026) return new Date(2026, 0, 1);
-    return d;
-  });
+  // Initialize to Jan 2026 as requested
+  const [currentDate, setCurrentDate] = useState(new Date(2026, 0, 1));
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -25,13 +20,16 @@ const Calendar: React.FC<CalendarProps> = ({ currentUser, workoutData, filter, o
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
 
-  // Monday as start of week
-  const firstDayOfMonthRaw = new Date(year, month, 1).getDay();
-  const firstDayOfMonth = firstDayOfMonthRaw === 0 ? 6 : firstDayOfMonthRaw - 1;
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  // Navigation constraints for 2026
+  const canPrev = month > 0;
+  const canNext = month < 11;
 
-  const prevMonth = () => setCurrentDate(new Date(year, month - 1, 1));
-  const nextMonth = () => setCurrentDate(new Date(year, month + 1, 1));
+  const prevMonth = () => {
+    if (canPrev) setCurrentDate(new Date(year, month - 1, 1));
+  };
+  const nextMonth = () => {
+    if (canNext) setCurrentDate(new Date(year, month + 1, 1));
+  };
 
   const formatDate = (day: number) => {
     const d = new Date(year, month, day);
@@ -54,6 +52,10 @@ const Calendar: React.FC<CalendarProps> = ({ currentUser, workoutData, filter, o
 
     const isPastOrToday = dateObj <= today;
     const isHoliday = CHINESE_HOLIDAYS_2026.has(dateStr);
+    // Saturday is 6, Sunday is 0
+    const dayOfWeek = dateObj.getDay();
+    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+
     const allUsersOnThisDay = workoutData[dateStr] || [];
     
     const visibleUsers = filter === 'ALL' 
@@ -95,7 +97,7 @@ const Calendar: React.FC<CalendarProps> = ({ currentUser, workoutData, filter, o
         <span className={`
           relative z-10 font-extrabold text-[15px] transition-colors duration-300
           ${visibleUsers.length > 0 ? 'text-white' : 
-            isHoliday ? 'text-red-500' : 
+            (isHoliday || isWeekend) ? 'text-red-500' : 
             isPastOrToday ? 'text-black' : 'text-slate-200'}
         `}>
           {d}
@@ -107,13 +109,21 @@ const Calendar: React.FC<CalendarProps> = ({ currentUser, workoutData, filter, o
   return (
     <div className="w-full flex flex-col">
       <div className="flex items-center justify-between mb-12">
-        <button onClick={prevMonth} className="text-black/20 hover:text-black transition-colors p-2">
+        <button 
+          onClick={prevMonth} 
+          disabled={!canPrev}
+          className={`transition-colors p-2 ${canPrev ? 'text-black hover:opacity-60' : 'text-slate-200 cursor-not-allowed'}`}
+        >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </button>
         <h2 className="text-3xl font-black text-black tracking-tight">
           {MONTHS[month]} <span className="opacity-100">{year}</span>
         </h2>
-        <button onClick={nextMonth} className="text-black/20 hover:text-black transition-colors p-2">
+        <button 
+          onClick={nextMonth} 
+          disabled={!canNext}
+          className={`transition-colors p-2 ${canNext ? 'text-black hover:opacity-60' : 'text-slate-200 cursor-not-allowed'}`}
+        >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </button>
       </div>
