@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { UserRole } from '../types';
 import { USERS } from '../constants';
@@ -9,37 +8,39 @@ interface RolePickerProps {
 
 const RolePicker: React.FC<RolePickerProps> = ({ onSelect }) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 bg-white">
-      <div className="mb-12 text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 mb-2">Welcome Back!</h1>
-        <p className="text-slate-500">Please select your name to continue</p>
+    <div className="flex flex-col items-center justify-center min-h-screen px-6 bg-white font-sans">
+      {/* Header Area */}
+      <div className="mb-16 text-center">
+        <h1 className="text-[32px] font-semibold tracking-tight text-black mb-3">FitFriends</h1>
+        <p className="text-[15px] text-slate-400 font-medium">Please select your name to continue</p>
       </div>
 
-      <div className="grid w-full max-w-xs gap-4">
+      {/* Selection Area */}
+      <div className="flex flex-col w-full max-w-[280px] space-y-3">
         {(Object.keys(USERS) as UserRole[]).map((key) => {
           const user = USERS[key];
           return (
             <button
               key={key}
               onClick={() => onSelect(key)}
-              className={`flex items-center justify-between p-5 rounded-2xl border-2 transition-all active:scale-95 ${user.borderColor} bg-white hover:bg-slate-50`}
+              className="group flex items-center p-4 rounded-2xl border-[0.5px] border-slate-100 bg-white transition-all active:opacity-60 hover:border-slate-200"
             >
               <div className="flex items-center space-x-4">
-                <div className={`w-12 h-12 rounded-full ${user.bgColor} flex items-center justify-center text-white font-bold text-xl shadow-lg`}>
+                {/* Avatar: Flat design, no shadow */}
+                <div className={`w-10 h-10 rounded-full ${user.bgColor} flex items-center justify-center text-white font-semibold text-base`}>
                   {user.name.charAt(0)}
                 </div>
-                <span className="font-semibold text-lg text-slate-700">{user.name}</span>
-              </div>
-              <div className={`w-6 h-6 rounded-full border-2 ${user.borderColor} flex items-center justify-center`}>
-                <div className={`w-2 h-2 rounded-full ${user.bgColor}`}></div>
+                {/* Name: Clean and simple */}
+                <span className="text-[16px] font-medium text-slate-900">{user.name}</span>
               </div>
             </button>
           );
         })}
       </div>
 
-      <div className="mt-16 text-slate-400 text-sm italic">
-        2026也不用成为厉害的人，只要健康就好 ✨
+      {/* Footer: Minimalist italic text */}
+      <div className="mt-24 text-slate-300 text-[13px] font-medium tracking-wide italic">
+        Be healthy. That's enough.
       </div>
     </div>
   );
