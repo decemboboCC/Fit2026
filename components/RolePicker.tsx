@@ -39,7 +39,7 @@ const RolePicker: React.FC<RolePickerProps> = ({ onSelect }) => {
       </div>
 
       <div className="mt-16 text-slate-400 text-sm italic">
-        2026也不用成为厉害的人，只要健康就好
+        2026也不用成为厉害的人，只要健康就好 ✨
       </div>
     </div>
   );
