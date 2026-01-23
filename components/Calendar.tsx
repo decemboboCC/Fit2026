@@ -70,8 +70,8 @@ const Calendar: React.FC<CalendarProps> = ({ currentUser, workoutData, filter, o
     days.push(
       <div 
         key={d} 
-        onClick={() => onToggleWorkout(dateStr)}
-        className="relative h-16 flex flex-col items-center justify-center cursor-pointer select-none"
+        onClick={() => isPastOrToday && onToggleWorkout(dateStr)}
+        className={`relative h-16 flex flex-col items-center justify-center select-none ${isPastOrToday ? 'cursor-pointer' : 'cursor-default'}`}
       >
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           {visibleUsers.map((role, index) => {
