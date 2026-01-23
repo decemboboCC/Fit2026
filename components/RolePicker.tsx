@@ -23,7 +23,7 @@ const RolePicker: React.FC<RolePickerProps> = ({ onSelect }) => {
             <button
               key={key}
               onClick={() => onSelect(key)}
-              className="group flex items-center p-4 rounded-2xl border-[0.5px] border-slate-100 bg-white transition-all active:opacity-60 hover:border-slate-200"
+              className="group flex items-center p-4 rounded-2xl border-[1px] border-slate-100 bg-white transition-all active:opacity-60 hover:border-slate-200"
             >
               <div className="flex items-center space-x-4">
                 {/* Avatar: Flat design, no shadow */}

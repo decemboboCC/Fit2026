@@ -87,7 +87,7 @@ const App: React.FC = () => {
 
       {/* Main Content: The White Card */}
       <main className="flex-1 flex flex-col px-4 pb-4">
-        <div className="bg-white flex-1 rounded-[40px] px-6 py-12">
+        <div className="bg-white flex-1 rounded-[32px] px-4 py-8 sm:px-6 sm:py-12">
           <Calendar 
             currentUser={currentUser}
             workoutData={workoutData}
