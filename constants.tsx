@@ -5,23 +5,23 @@ export const USERS: Record<UserRole, UserProfile> = {
   A: {
     id: 'A',
     name: '木南',
-    color: 'rgb(99, 102, 241)', // Indigo 500
-    bgColor: 'bg-indigo-500',
-    borderColor: 'border-indigo-500',
+    color: '#323FD5',
+    bgColor: 'bg-[#323FD5]',
+    borderColor: 'border-[#323FD5]',
   },
   B: {
     id: 'B',
     name: '夹心',
-    color: 'rgb(16, 185, 129)', // Emerald 500
-    bgColor: 'bg-emerald-500',
-    borderColor: 'border-emerald-500',
+    color: '#0083B6',
+    bgColor: 'bg-[#0083B6]',
+    borderColor: 'border-[#0083B6]',
   },
   C: {
     id: 'C',
     name: '蹭蹭',
-    color: 'rgb(245, 158, 11)', // Amber 500
-    bgColor: 'bg-amber-500',
-    borderColor: 'border-amber-500',
+    color: '#688200',
+    bgColor: 'bg-[#688200]',
+    borderColor: 'border-[#688200]',
   },
 };
 

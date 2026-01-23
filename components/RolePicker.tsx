@@ -12,7 +12,7 @@ const RolePicker: React.FC<RolePickerProps> = ({ onSelect }) => {
     <div className="flex flex-col items-center justify-center min-h-screen px-6 bg-white">
       <div className="mb-12 text-center">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 mb-2">Welcome Back!</h1>
-        <p className="text-slate-500">Please select your character to continue</p>
+        <p className="text-slate-500">Please select your name to continue</p>
       </div>
 
       <div className="grid w-full max-w-xs gap-4">
@@ -39,7 +39,7 @@ const RolePicker: React.FC<RolePickerProps> = ({ onSelect }) => {
       </div>
 
       <div className="mt-16 text-slate-400 text-sm italic">
-        Syncing your progress with friends...
+        2026也不用成为厉害的人，只要健康就好
       </div>
     </div>
   );

@@ -90,8 +90,8 @@ const Calendar: React.FC<CalendarProps> = ({ currentUser, workoutData, filter, o
               <div
                 key={role}
                 className={`
-                  absolute w-9 h-9 rounded-full opacity-90 transition-all duration-300 transform
-                  ${USERS[role].bgColor} ${offsetClass}
+                  absolute w-9 h-9 rounded-full transition-all duration-300 transform
+                  ${USERS[role].bgColor}/20 ${offsetClass}
                   ${total > 1 ? 'ring-2 ring-white scale-90' : 'scale-100'}
                 `}
               />
@@ -101,7 +101,7 @@ const Calendar: React.FC<CalendarProps> = ({ currentUser, workoutData, filter, o
 
         <span className={`
           relative z-10 font-extrabold text-[15px] transition-colors duration-300
-          ${visibleUsers.length > 0 ? 'text-white' : 
+          ${visibleUsers.length > 0 ? 'text-black' : 
             (isHoliday || isWeekend) 
               ? (isPastOrToday ? 'text-red-500' : 'text-red-200') 
               : (isPastOrToday ? 'text-black' : 'text-slate-200')}
