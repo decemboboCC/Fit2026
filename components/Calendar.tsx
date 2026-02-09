@@ -11,8 +11,13 @@ interface CalendarProps {
 }
 
 const Calendar: React.FC<CalendarProps> = ({ currentUser, workoutData, filter, onToggleWorkout }) => {
-  // Initialize to Jan 2026 as requested
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 0, 1));
+  // Initialize to current date, but capped within 2026
+  const [currentDate, setCurrentDate] = useState(() => {
+    const now = new Date();
+    // If it's 2026, use current month. Otherwise, default to Jan 2026.
+    if (now.getFullYear() === 2026) return now;
+    return new Date(2026, 0, 1);
+  });
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
